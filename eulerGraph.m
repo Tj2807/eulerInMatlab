@@ -4,11 +4,11 @@
 
 classdef eulerGraph
     properties
-        graphInp
+        graphInp, oddVertex ;
     end
     methods
         function obj = eulerGraph(edges)
-            obj.graphInp= edges;
+            obj.graphInp=edges;
         end
         function isIt = isEuler(obj)
         nRows = size(obj.graphInp,1);
@@ -19,6 +19,7 @@ classdef eulerGraph
             sumRow = sum(obj.graphInp(i,:));
             if mod(sumRow,2)~=0
                 oddVertexCount = oddVertexCount+ 1;
+                obj.oddVertex = i ;
             end
         end
         if oddVertexCount==0
@@ -28,7 +29,15 @@ classdef eulerGraph
         else
             isIt=0;
         end
-       end
+        end
+        function rmv = rmvEdge(obj,u,v)
+            obj.graphInp(u,v) = -1;
+            rmv = obj.graphInp(u,v);
+        end
+        function addedg = addEdge(obj,u,v)
+            obj.graphInp(u,v) = 1;
+            addedg = obj.graphInp(u,v);
+        end
     end
 end
     
