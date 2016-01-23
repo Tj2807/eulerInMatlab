@@ -58,8 +58,8 @@ classdef eulerGraph
             end
         end
         function rmvEdge(obj,u,v)
+            obj.graphInp(u,v) = -1;
             obj.graphInp(v,u) = -1;
-            obj.graphInp(u,v) = -1; %#ok<MCHV2>
         end
         function addEdge(obj,u,v)
             obj.graphInp(u,v) = 1;
